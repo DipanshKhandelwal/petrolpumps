@@ -14,7 +14,6 @@ class PumpsList extends Component {
 
   state = {
     text : "",
-    list: null,
     response: null
   }
 
@@ -84,6 +83,7 @@ class PumpsList extends Component {
             onChangeText={(text) => this._onTextChange( text )}
             placeholder="Enter place !!"
             value={this.state.text}
+            onSubmitEditing={() => this._goPressed()}
             />
           <Button title="Go" onPress={() => this._goPressed() } style={{ marginRight: 10 }} />
         </View>
@@ -94,7 +94,12 @@ class PumpsList extends Component {
           }}/>
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }} >
-          <Button style={{ padding: 10, margin: 20 }} title="Mapview" onPress={()=> this.props.navigation.navigate('Mapview') } />
+          <Button
+            style={{ padding: 10, margin: 20 }}
+            title="Mapview"
+            onPress={()=> this.props.navigation.navigate('Mapview', { venues: this.state.response }) }
+            disabled={!this.state.response}
+          />
         </View>
         <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} >
           <Text> Results for : </Text>
