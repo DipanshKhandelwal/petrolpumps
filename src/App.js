@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button, BackHandler} from 'react-native';
+import {StyleSheet, Text, View, Image, BackHandler} from 'react-native';
 import Login from './Login'
 import { AccessToken } from 'react-native-fbsdk';
 
@@ -35,6 +35,11 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
           <View style={styles.container} >
+            <Text style={{ fontSize: 50, textAlign: 'center', margin: 30, }}>petrolpumps</Text>
+            <Image
+              style={{ marginBottom: 100 }}
+              source={require('../image/gasstation.png')}
+              />
             <Text style={styles.welcome}>Login to continue !!</Text>
             <Login />
           </View>
