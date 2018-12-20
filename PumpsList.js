@@ -92,6 +92,8 @@ class PumpsList extends Component {
             logout={() => {
             this.props.navigation.navigate('App')
           }}/>
+        </View>
+        <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }} >
           <Button style={{ padding: 10, margin: 20 }} title="Mapview" onPress={()=> this.props.navigation.navigate('Mapview') } />
         </View>
         <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} >
