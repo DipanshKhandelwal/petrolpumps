@@ -82,6 +82,8 @@ class PumpsList extends Component {
           <TextInput
             style={{ backgroundColor: '#F5FCFF', display: 'flex', flex: 1, padding: 5, marginRight: 5 }}
             onChangeText={(text) => this._onTextChange( text )}
+            placeholder="Enter place !!"
+            value={this.state.text}
             />
           <Button title="Go" onPress={() => this._goPressed() } style={{ marginRight: 10 }} />
         </View>
@@ -100,9 +102,11 @@ class PumpsList extends Component {
         </View>
         {
           !this.state.response?
-          <Text>
-            No Petrol Pumps
+          <View style={{ justifyContent: 'center', alignItems: 'center', padding: 20 }} >
+            <Text style={{ fontSize: 20, fontWeight:'500' }} >
+              No Petrol Pumps
           </Text>
+          </View>
           :
           <ScrollView>
             {
