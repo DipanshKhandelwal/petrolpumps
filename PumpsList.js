@@ -88,9 +88,11 @@ class PumpsList extends Component {
           <Button title="Go" onPress={() => this._goPressed() } style={{ marginRight: 10 }} />
         </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }} >
-          <Login logout={() => {
+          <Login
+            logout={() => {
             this.props.navigation.navigate('App')
           }}/>
+          <Button style={{ padding: 10, margin: 20 }} title="Mapview" onPress={()=> this.props.navigation.navigate('Mapview') } />
         </View>
         <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} >
           <Text> Results for : </Text>
