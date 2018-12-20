@@ -22,6 +22,58 @@ class PumpsList extends Component {
     this.setState({ text });
   }
 
+  _renderList = () => {
+    return(
+      _.map(this.state.response, (venue, index)=>
+      <TouchableOpacity key={venue.id} >
+        <View style={{ display: 'flex', flex: 1, flexDirection: 'column', margin: 5, padding: 10, borderColor: 'black', borderWidth: 1 }} >
+          <Text style={{ fontWeight: "bold", margin: 5 }} >
+            {venue.name}
+          </Text>
+          <Text style={{ margin: 5 }} >
+            {!venue.location.city?null:venue.location.city+', '}
+            {!venue.location.state?null:venue.location.state+', '}
+            {!venue.location.country?null:venue.location.country}
+          </Text>
+          <Text style={{ margin: 2 }} >
+            Latitute :{venue.location.lat}
+          </Text>
+          <Text style={{ margin: 2 }} >
+            Longitude :{venue.location.lng}
+          </Text>
+          <Text style={{ margin: 2 }} >
+            {venue.location.formattedAddress}
+          </Text>
+        </View>
+      </TouchableOpacity>
+      )
+    )
+  }
+
+  _updateState = (data) => {
+    this.setState({ response: data })
+  }
+
+  _goPressed = async () => {
+    axios.get('https://api.foursquare.com/v2/venues/search', 
+    {
+      params: {
+        near: this.state.text,
+        client_id: 'IZKYBFZGDXFIXKQYLEF4DYT1TZIOEQUJVKJUT3BQYCCN124P',
+        client_secret: '0LMXWHQXH2UE0SFY11CCTRRQ3WUS2KPE04GZLO1NRNTIQLC1',
+        v: 20160609,
+        categoryId: ['4bf58dd8d48988d113951735']
+      }
+    })
+    .then( (response) => {
+      console.log(response.data.response.venues)
+      this._updateState(response.data.response.venues)
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+  }
+
   render() {
     return(
       <View style={{ backgroundColor: '#F5FCFF', display: 'flex', flex: 1 }} >
@@ -31,8 +83,30 @@ class PumpsList extends Component {
             style={{ backgroundColor: '#F5FCFF', display: 'flex', flex: 1, padding: 5, marginRight: 5 }}
             onChangeText={(text) => this._onTextChange( text )}
             />
-          <Button title="Go" style={{ marginRight: 10 }} />
+          <Button title="Go" onPress={() => this._goPressed() } style={{ marginRight: 10 }} />
         </View>
+        <View style={{ justifyContent: 'center', alignItems: 'center', padding: 10 }} >
+          <Login logout={() => {
+            this.props.navigation.navigate('App')
+          }}/>
+        </View>
+        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} >
+          <Text> Results for : </Text>
+          <Text style={{ fontWeight: '800', color: 'blue' }} > {this.state.text} </Text>
+        </View>
+        {
+          !this.state.response?
+          <Text>
+            No Petrol Pumps
+          </Text>
+          :
+          <ScrollView>
+            {
+              this._renderList()
+            }
+          </ScrollView>
+        }
+      </View>
     );
   }
 }
