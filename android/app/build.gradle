@@ -141,6 +141,7 @@ repositories {
 }
 
 dependencies {
+    compile project(':react-native-maps')
     compile project(':react-native-gesture-handler')
     compile project(':react-native-fbsdk')
     implementation fileTree(dir: "libs", include: ["*.jar"])
