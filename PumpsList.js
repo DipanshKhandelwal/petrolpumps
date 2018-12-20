@@ -93,6 +93,10 @@ class PumpsList extends Component {
         <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} >
           <Text> Results for : </Text>
           <Text style={{ fontWeight: '800', color: 'blue' }} > {this.state.text} </Text>
+          {
+            !this.state.text ? null :
+              <Button title="x" style={{ marginLeft: 5 }} onPress={()=> this.setState({ text: "" }) } />
+          }
         </View>
         {
           !this.state.response?
