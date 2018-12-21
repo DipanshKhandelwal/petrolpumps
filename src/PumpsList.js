@@ -23,9 +23,23 @@ class PumpsList extends Component {
 
   _renderList = () => {
     return(
-      _.map(this.state.response, (venue, index)=>
-      <TouchableOpacity key={venue.id} >
-        <View style={{ display: 'flex', flex: 1, flexDirection: 'column', margin: 5, padding: 10, borderColor: 'black', borderWidth: 1 }} >
+      _.map(this.state.response, (venue)=>
+        <View key={venue.id}
+          style={{
+            display: 'flex',
+            flex: 1,
+            flexDirection: 'column',
+            margin: 5,
+            padding: 10,
+            borderRadius: 3,
+            shadowColor: '#000000',
+            shadowOpacity: 0.3,
+            shadowRadius: 3,
+            backgroundColor: '#ffffff',
+            elevation: 5,
+            shadowOffsetWidth: 3,
+            shadowOffsetHeight: 3,
+          }} >
           <Text style={{ fontWeight: "bold", margin: 5 }} >
             {venue.name}
           </Text>
@@ -44,7 +58,6 @@ class PumpsList extends Component {
             {venue.location.formattedAddress}
           </Text>
         </View>
-      </TouchableOpacity>
       )
     )
   }
@@ -103,7 +116,7 @@ class PumpsList extends Component {
           <Text style={{ fontWeight: '800', color: 'blue' }} > {this.state.text} </Text>
           {
             !this.state.text ? null :
-              <Button title="x" style={{ marginLeft: 5 }} onPress={()=> this.setState({ text: "" }) } />
+              <Button title="x" style={{ marginLeft: 5 }} onPress={()=> this.setState({ text: "", response: null }) } />
           }
         </View>
         {
